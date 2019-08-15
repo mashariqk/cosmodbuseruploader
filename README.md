@@ -1,4 +1,4 @@
-# Azure Cosmo DB Uploader
+# Azure Cosmos DB Uploader
 
 This small spring boot app reads a .txt file from dropfolder/inbound 
 directory and uploads it to the Azure Cosmos DB. After the file
