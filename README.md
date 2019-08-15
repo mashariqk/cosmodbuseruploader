@@ -7,7 +7,7 @@ has been processed it is moved to the dropfolder/archive folder.
 Makes use of Spring Boot, Spring Batch and Spring Integration
 
 To make this work you will need to put the following values in the
-resources/application.properties file
+src/main/resources/application.properties file
 
 ```properties
 # Specify the DNS URI of your Azure Cosmos DB.
