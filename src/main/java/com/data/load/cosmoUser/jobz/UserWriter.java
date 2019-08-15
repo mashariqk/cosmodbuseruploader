@@ -11,10 +11,10 @@ public class UserWriter implements ItemWriter<User> {
 
     @Resource
     private UserRepository userRepository;
-    
+
     @Override
     public void write(List<? extends User> users) throws Exception {
-        for (User user:users){
+        for (User user : users) {
             userRepository.save(user);
         }
     }

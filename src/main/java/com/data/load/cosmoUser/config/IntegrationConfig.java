@@ -48,7 +48,7 @@ public class IntegrationConfig {
     @Bean
     public MessageSource<File> fileReadingMessageSource() {
         FileReadingMessageSource source = new FileReadingMessageSource();
-        source.setDirectory(new File("dropfolder"));
+        source.setDirectory(new File("dropfolder/inbound"));
         source.setFilter(new SimplePatternFileListFilter("*.txt"));
         source.setUseWatchService(true);
         source.setWatchEvents(FileReadingMessageSource.WatchEventType.CREATE);
@@ -68,5 +68,5 @@ public class IntegrationConfig {
         JobLaunchingMessageHandler handler = new JobLaunchingMessageHandler(jobLauncher);
         return handler;
     }
-    
+
 }

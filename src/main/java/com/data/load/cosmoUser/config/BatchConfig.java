@@ -42,7 +42,7 @@ public class BatchConfig {
                         setNames(new String[]{"first_name", "last_name"});
                     }
                 });
-                setFieldSetMapper(new BeanWrapperFieldSetMapper<User>(){
+                setFieldSetMapper(new BeanWrapperFieldSetMapper<User>() {
                     {
                         setTargetType(User.class);
                     }
@@ -52,24 +52,31 @@ public class BatchConfig {
         return itemReader;
     }
 
+
     @Bean
-    public UserWriter writer(){
+    public UserWriter writer() {
         return new UserWriter();
     }
 
     @Bean
-    public Step step1(FlatFileItemReader<User> reader, UserWriter writer){
+    public Step step1(FlatFileItemReader<User> reader, UserWriter writer) {
         return stepBuilderFactory.get("step1")
-                .<User,User>chunk(10)
+                .<User, User>chunk(10)
                 .reader(reader)
                 .writer(writer)
                 .build();
     }
 
     @Bean
-    public Job readUsersJob(Step step1){
+    public ReadUserJobListener readUserJobListener() {
+        return new ReadUserJobListener();
+    }
+
+    @Bean
+    public Job readUsersJob(Step step0, Step step1) {
         return jobBuilderFactory.get("readUsersJob")
                 .incrementer(new RunIdIncrementer())
+                .listener(readUserJobListener())
                 .flow(step1)
                 .end()
                 .build();
